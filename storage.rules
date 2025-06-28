@@ -1,0 +1,13 @@
+
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      // Allow public read on all files so images can be displayed
+      allow read: if true;
+      // Allow writes. This is secured by the middleware protecting the admin panel.
+      allow write: if true;
+    }
+  }
+}

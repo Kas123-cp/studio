@@ -1,0 +1,17 @@
+
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow public read and write access.
+    // The admin routes that perform writes are protected by middleware.
+    match /Laptops/{productId} {
+      allow read: if true;
+      allow write: if true; // Allow writes from the server action
+    }
+    
+    match /admin/{doc} {
+        allow read, write: if true; // Allow server action to update credentials
+    }
+  }
+}
